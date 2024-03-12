@@ -1,0 +1,26 @@
+SUBDIRS = bmpio entities grid sim lists settings threadlocals affinity  
+LDFLAGS = -lpthread -lmtmalloc  
+CFLAGS = -xarch=v9b -xchip=ultra3 -xO3 
+CC = /opt/SUNWspro/bin/CC
+
+export LDFLAGS CFLAGS CC
+
+all: 
+	for i in $(SUBDIRS) ; do \
+	(cd $$i; make ) ; \
+	done && \
+	$(CC) $(CFLAGS) -c main.cpp ; \
+	$(CC) $(CFLAGS) $(LDFLAGS) -o limmsim main.o affinity/*.o threadlocals/*.o bmpio/*.o entities/*.o grid/*.o lists/*.o settings/*.o sim/*.o
+
+clean:
+	rm -f *.o limmsim\
+	rm -rf output/dumps\
+	mkdir -p output/dumps\
+	mkdir -p output/dumps/ag\
+	mkdir -p output/dumps/b\
+	rm -f output/data/*\
+
+distclean: clean
+	for i in $(SUBDIRS); do \
+	(cd $$i; make clean ); \
+	done; \

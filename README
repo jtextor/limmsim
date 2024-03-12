@@ -1,0 +1,148 @@
+LImmSim - Readme
+===================
+
+  An agent based simulation of the vertebrate adaptive immune response.
+
+  Version 0.1 - 2007-11-11
+  --------------------------
+  http://www.tcs.uni-luebeck.de/forschung/software/limmsim/
+
+    Copyright (C) 2007 Johannes Textor <textor@tcs.uni-luebeck.de>
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+  Requirements:
+    g++ to compile the source.
+    wish (tcl/tk) to use the GUI.
+
+  Summary:
+    LImmSim is an extended and modified implementation of the Celada-Seiden
+    model as described in 
+    Currently it includes the following processes:
+      - B and T cells, Macrophages, Antigen, and Antibody
+      - Unspecific phagocytosis of Antigen by Macrophages
+      - Specific phagocytosis of Antigen by B-cells
+      - Antigen presentation and costimulation
+      - Development of Plasma B cells, secretion of antibody
+      - Formation of immune coplexes of antibody and antigen
+      - Formation of immune memory through memory B cells
+      - Somatic hypermutation of the B cell receptor
+
+
+      - delete, edit and add fields
+      - execute any SQL-statement, even batch-queries
+      - manage keys on fields
+      - load text files into tables
+      - create and read dumps of tables
+      - export and import CSV data
+      - administer one single database
+      - communicate in more than 38 different languages
+
+  Download:
+    You can get the newest version at the URL
+    http://www.tcs.uni-luebeck.de/forschung/software/limmsim/
+
+  Compilation:
+    Hopefully, you will only need to type "make" in the source directory to 
+    compile LImmSim. The provided Makefile has worked for me on several Linux
+    distributions. An alternative Makefile is provided for Solaris which uses
+    the Sun C++ compiler. If you encounter problems with the makefiles, please
+    let me know about it. 
+
+  Installation:
+    limmsim-gui.tcl and the limmsim binary have no additional dependencies and
+    can be copied to an arbitrary directory. LImmSim writes its output to a
+    subdirectory named "output" which is expected to contain two additional
+    subdirectories "data" (for cell counts) and "dumps" (for BMP images of
+    cell and molecule concentrations). Sample GNU-Plot scripts to summarize the
+    simulation output are provided in the "output"-directory of the source
+    tarball.
+
+  Usage:
+    You may use LImmSim directly from the command line or via the GUI. If
+    limmsim is called with no arguments, it will run with the compiled-in
+    standard parameters, which is basically useless since these parameters do
+    not define antigen injections. When LImmSim is called with the argument -i:
+
+    ./limmsim -i
+
+    it will read parameter definitions from standard input. E.g., you may type
+
+    dump_bmps 1
+
+    to tell LImmSim to generate BMP dumps of cell and molecule concentrations.
+    When CTRL-D or a line containing only a dot (".") is encountered, the 
+    simulation is started. Parameters which have not been given on standard
+    input will have the default values.
+
+    It is convenient to store the parameters in a text file and pass them to
+    LImmSim via 
+
+    ./limmsim -i < settings/default-settings.txt
+
+    Execute this command in the source directory to see limmsim get ill and
+    (hopefully) cure itself twice. 
+
+  Parameters:
+
+    In an upcoming release of LImmSim, there will be a file PARAMETERS which
+    explains what all these parameters actually mean. 
+
+  Credits:
+
+    LImmSim is an implementation of a conceptual model originally developed by
+    Franco Celada and Philip Seiden [1].
+
+    The development of LImmSim would not have been possible without the
+    open-source version of C-ImmSim, v6, developed by Filippo Castiglione [2,3],
+    which includes several extensions to the original CS model. For example,
+    contains simulations of cancer and an HIV infection. [4].
+
+    The following pieces of Free software have been developed by other people
+    and are used in LImmSim:
+
+    - BMP_IO is a collection of C functions to read and write images in BMP
+      format written by John Burkhardt:
+      http://people.scs.fsu.edu/~burkardt/cpp_src/bmp_io/bmp_io.html
+
+    - combobox is a "completely, totally, free" widget for tk written by Bryan
+      Douglas Oakley. Without it the GUI would be much less usable:
+      http://www1.clearlight.com/~oakley/tcl/combobox/index.html
+
+    - The mersenne twister is a fast pseudo random number generator written by
+      Richard J. Wagner:
+      http://www-personal.umich.edu/~wagnerr/MersenneTwister.html
+
+    Thanks to you guys for your excellent work.
+
+  Bibliography:
+
+    [1] P. E. Seiden and F. Celada
+        A Model for Simulating Cognate Recognition and Response in the Immune
+        System
+        Journal of Theoretical Biology 158:329-357, 1992
+
+    [2] M. Bernaschi and F. Castiglione
+        Design and Implementation of an Immune System Simulator
+        Computers  in Biology and Medicine, 31(5) 303-331, 2001
+
+    [3] F. Castiglione, M. Bernaschi and S. Succi
+        Simulating the Immune Response on a Distributed Parallel Computer
+        Int J Mod Phys C 8(3), 527-545, 1997
+
+    [4] F.Castiglione, F. Poccia, G. D'Offizi and M. Bernaschi
+        Mutation, fitness, viral diversity and predictive markers of disease
+        progression in a computational model of HIV-1 infection
+        AIDS Research and Human Retrovirus, 20(12), 1316-1325, 2004
